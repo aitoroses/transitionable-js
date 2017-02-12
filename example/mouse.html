@@ -13,8 +13,8 @@
 <div id="squareId" class="square"></div>
 
 <script type="text/javascript">
-    var x = Transitionable(0)                                  // X Default
-    var y = Transitionable(0, { stiffness: 120, damping: 2 })  // Y Wombly
+    var x = Transitionable(0)                                  // X Default { stiffness: 90, damping: 8 }
+    var y = Transitionable(0, { stiffness: 120, damping: 2 })  // Y Wombly  { stiffness: 120, damping: 2 }
 
     document.addEventListener('mousemove', e => {
         x.value = e.clientX
