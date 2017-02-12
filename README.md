@@ -4,9 +4,9 @@ Transitionable is a way of encapsulating an animated spring.
 
 It's value can be mapped to anything. For example, in `example/mouse.html`
 
-```
-var x = Transitionable(0)                                  // X Default
-var y = Transitionable(0, { stiffness: 120, damping: 2 })  // Y Wombly
+```js
+const x = Transitionable(0)                                  // X Default
+const y = Transitionable(0, { stiffness: 120, damping: 2 })  // Y Wombly
 
 document.addEventListener('mousemove', e => {
     x.value = e.clientX
