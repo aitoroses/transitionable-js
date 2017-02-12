@@ -14,7 +14,7 @@ function createContext(value: number, p: Params) {
         v: 0,          // Velocity
         a: 0,          // Acceleration
         m: 1,          // Mass
-        t0: 0
+        t0: null
     }
 }
 
@@ -71,6 +71,9 @@ export function Transitionable(
             }
 
         } else {
+            if (!animationFrame) {
+                ctx.t0 = (new Date).getTime()
+            }
 
             animationFrame = requestAnimationFrame(applyPhysics)
         }
@@ -88,9 +91,8 @@ export function Transitionable(
         }
 
         set value(x: number) {
-            ctx.t0 = (new Date).getTime()
             ctx.target = x
-            animate()
+            if (!animationFrame) animate()
         }
 
         setParams(p: Params) {
