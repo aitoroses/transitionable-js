@@ -1,4 +1,6 @@
 import 'raf.js'
 import { Transitionable } from './transitionable'
 
-export default Transitionable
+declare var module: any
+
+module.exports = Transitionable
