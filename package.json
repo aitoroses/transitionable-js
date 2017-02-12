@@ -1,6 +1,6 @@
 {
   "name": "transitionable",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Small library providing a spring observable",
   "main": "dist/transitionable.min.js",
   "typings": "src/index.ts",
@@ -13,7 +13,8 @@
     "serve": "http-server -p 8080",
     "build:dev": "rollup -c rollup.config.js --output dist/transitionable.js",
     "build:prod": "NODE_ENV=production rollup -c rollup.config.js --output dist/transitionable.min.js",
-    "build": "run-p build:*"
+    "build": "run-p build:*",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "http-server": "^0.9.0",
