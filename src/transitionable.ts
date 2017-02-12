@@ -6,14 +6,14 @@ type Params = {
 const DELTA_VALUE = 0.0001
 const DEFAULT_PHYSICS: Params = { stiffness: 90, damping: 8 }
 
-function createContext(value: number, params: Params) {
+function createContext(value: number, p: Params) {
     return {
-        target: value,
-        current: value,
-        params,
-        velocity: 0,
-        acceleration: 0,
-        mass: 1,
+        target: value, // Target Value
+        curr: value,   // Current Value
+        p,             // Physics Params
+        v: 0,          // Velocity
+        a: 0,          // Acceleration
+        m: 1,          // Mass
         t0: 0
     }
 }
@@ -35,7 +35,7 @@ export function Transitionable(
 
     function notify() {
         // Call the subscribers
-        subscribers.forEach(fn => fn(ctx.current))
+        subscribers.forEach(fn => fn(ctx.curr))
     }
 
 
@@ -45,15 +45,15 @@ export function Transitionable(
         let t1 = (new Date).getTime()
         let timeDelta = (t1 - ctx.t0) / 1000 // seconds
 
-        const spring = -params.stiffness * (ctx.current - ctx.target)
-        const damper = -params.damping * ctx.velocity
+        const spring = -params.stiffness * (ctx.curr - ctx.target)
+        const damper = -params.damping * ctx.v
 
         // update acceleration
-        ctx.acceleration = ( spring + damper ) / ctx.mass
+        ctx.a = ( spring + damper ) / ctx.m
         // update velocity
-        ctx.velocity += ctx.acceleration * timeDelta
+        ctx.v += ctx.a * timeDelta
         // update position
-        ctx.current += ctx.velocity * timeDelta
+        ctx.curr += ctx.v * timeDelta
 
         notify()
 
@@ -62,11 +62,11 @@ export function Transitionable(
     }
 
     function animate() {
-        if ( Math.abs(ctx.current - ctx.target) <= DELTA_VALUE ) {
+        if ( Math.abs(ctx.curr - ctx.target) <= DELTA_VALUE ) {
             if (animationFrame) {
                 cancelAnimationFrame(animationFrame)
                 animationFrame = undefined
-                ctx = createContext(ctx.target, ctx.params)
+                ctx = createContext(ctx.target, ctx.p)
                 notify()
             }
 
@@ -91,6 +91,10 @@ export function Transitionable(
             if (!ctx.t0) ctx.t0 = (new Date).getTime()
             ctx.target = x
             animate()
+        }
+
+        setParams(p: Params) {
+            ctx.p = p || DEFAULT_PHYSICS
         }
 
         map(fn: (x: number) => any) {
