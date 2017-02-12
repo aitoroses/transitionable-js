@@ -1,0 +1,40 @@
+<script type="text/javascript" src="../dist/transitionable.js"></script>
+<style>
+    .container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .square {
+        position: relative;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: black;
+    }
+</style>
+
+<div class="container">
+    <div id="squareId" class="square"></div>
+</div>
+
+<script type="text/javascript">
+    var amplitude = 200
+    var t = Transitionable(0, { stiffness: 50, damping: 5 })
+
+    t.map(rads => {
+        const y = Math.sin(rads)
+        const x = Math.cos(rads)
+        squareId.style.top  = - amplitude * y
+        squareId.style.left = - amplitude * x
+    })
+
+    function next() {
+        t.value += Math.PI / 2
+    }
+
+    setInterval(next, 1000)
+
+</script>
