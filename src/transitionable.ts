@@ -88,7 +88,7 @@ export function Transitionable(
         }
 
         set value(x: number) {
-            if (!ctx.t0) ctx.t0 = (new Date).getTime()
+            ctx.t0 = (new Date).getTime()
             ctx.target = x
             animate()
         }
