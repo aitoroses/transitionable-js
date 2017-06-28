@@ -21,7 +21,10 @@ We are mapping mouse position to `x` and `y` transitionables, and they are mappe
 
 We are using different parameters for having different physics on each of the axis.
 
-[Live demo](https://aitoroses.github.io/transitionable-js/mouse.html)
+[Basic demo](https://aitoroses.github.io/transitionable-js/basic.html)
+[Interpolation demo](https://aitoroses.github.io/transitionable-js/interpolation.html)
+[Mouse demo](https://aitoroses.github.io/transitionable-js/mouse.html)
+
 
 # Install
 
